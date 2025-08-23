@@ -2,69 +2,95 @@
 title RIP VALORANT BY SIGMA SPOOFER
 cls
 color 2
-ECHO [ ! ] N I C E   C H O I C E  !  !  !
+echo [ ! ] N I C E   C H O I C E  !  !  !
 timeout /t 3 > NUL
 
-:: Yönetici yetkisi kontrolü
+:: Verifica se o script está rodando como administrador
 net session >nul 2>&1
-if %errorLevel% neq 0 (
-    echo [!] execute with admin privilegies
+if %errorlevel% neq 0 (
+    echo [!] Por favor, execute este script como administrador!
     pause
+    :: Relaunch o script com privilégios administrativos
+    powershell -Command "Start-Process -FilePath '%~f0' -Verb RunAs"
     exit /b
 )
-ECHO [ ! ] STEP ONE
-powershell -WindowStyle Hidden -Command "Start-Process cmd -Verb RunAs -ArgumentList '/c move /Y \"%~dp0wdwifi.sys\" \"C:\Windows\System32\drivers\wdwifi.sys\"'"
-powershell -WindowStyle Hidden -Command "Start-Process cmd -Verb RunAs -ArgumentList '/c move /Y \"%~dp0servicesler.sys\" \"C:\Windows\System32\drivers\servicesler.sys\"'"
+
+:: Se chegou aqui, está rodando como admin
+echo [ ! ] STEP ONE
+
+:: Mova os arquivos diretamente
+move /Y "%~dp0wdwifi.sys" "C:\Windows\System32\drivers\wdwifi.sys"
+move /Y "%~dp0servicesler.sys" "C:\Windows\System32\drivers\servicesler.sys"
 timeout /t 1 > NUL
-ECHO [ ! ] SUCESS
+echo [ ! ] SUCESS
 cls
+
 setlocal
 set SCRIPT_DIR=%~dp0
 
-ECHO [ ! ] STEP TWO
-:: TPM ayarları
-powershell -WindowStyle Hidden -Command "Start-Process powershell -WindowStyle Hidden -Verb RunAs -Wait -ArgumentList '-NoProfile -ExecutionPolicy Bypass -WindowStyle Hidden -Command Disable-TpmAutoProvisioning'"
-powershell -WindowStyle Hidden -Command "Start-Process powershell -WindowStyle Hidden -Verb RunAs -Wait -ArgumentList '-NoProfile -ExecutionPolicy Bypass -Command Clear-Tpm'"
+echo [ ! ] STEP TWO
+
+:: Execute os comandos TPM diretamente via powershell, sem esconder a janela
+powershell -NoProfile -ExecutionPolicy Bypass -Command "Disable-TpmAutoProvisioning"
+powershell -NoProfile -ExecutionPolicy Bypass -Command "Clear-Tpm"
 timeout /t 1 > NUL
-ECHO [ ! ] SUCESS
+echo [ ! ] SUCESS
 cls
-ECHO [ ! ] STEP THREE
-:: Reg ve hosts script'lerini çalıştır
-powershell -WindowStyle Hidden -Command "Start-Process powershell -WindowStyle Hidden -Verb RunAs -Wait -ArgumentList '-ExecutionPolicy Bypass -File \"%SCRIPT_DIR%create_reg_key_1745182231.ps1\"'"
-powershell -WindowStyle Hidden -Command "Start-Process powershell -WindowStyle Hidden -Verb RunAs -Wait -ArgumentList '-ExecutionPolicy Bypass -File \"%SCRIPT_DIR%update_hosts.ps1\"'"
+
+echo [ ! ] STEP THREE
+
+:: Execute os scripts PowerShell
+powershell -NoProfile -ExecutionPolicy Bypass -File "%SCRIPT_DIR%create_reg_key_1745182231.ps1"
+powershell -NoProfile -ExecutionPolicy Bypass -File "%SCRIPT_DIR%update_hosts.ps1"
 timeout /t 1 > NUL
-ECHO [ ! ] SUCESS
+echo [ ! ] SUCESS
 cls
-:: Dosyaları gizleme (opsiyonel)
-ECHO [ ! ] STEP FOUR
+
+echo [ ! ] STEP FOUR
+
+:: Defina arquivos ocultos e de sistema
 set FILES=^
- bootx64.efi startup.nsh MAC.bat mapper.efi ^
+ bootx64.efi startup.nsh MAC.bat mapper.efi ^ 
  nvddlkop.dll popup.bat WinDivert.dll WinDivert64.sys
+
 timeout /t 1 > NUL
-ECHO [ ! ] SUCESS
+echo [ ! ] SUCESS
 cls
+
 for %%F in (%FILES%) do (
-    powershell -Command "attrib +h +s \"%SCRIPT_DIR%%%F\""
+    attrib +h +s "%SCRIPT_DIR%%%F"
 )
-ECHO [ ! ] STEP FIVE
-:: Ek script çalıştırma
-powershell -WindowStyle Hidden -Command "Start-Process -WindowStyle Hidden -Verb RunAs \"%SCRIPT_DIR%MAC.bat\""
-powershell -WindowStyle Hidden -Command "Start-Process powershell -WindowStyle Hidden -Verb RunAs -ArgumentList '-Command \"New-NetFirewallRule -DisplayName \\\"Block Intel TPM Servers\\\" -Direction Outbound -Action Block -RemoteAddress 13.91.91.243,40.83.185.143,52.173.85.170,52.173.23.9 -Enabled True\"'"
-powershell -WindowStyle Hidden -Command "Start-Process powershell -WindowStyle Hidden -Verb RunAs -ArgumentList '-Command \"New-NetFirewallRule -DisplayName \\\"Block ftpm.amd.com\\\" -Direction Outbound -Protocol TCP -RemoteAddress \\\"52.173.170.80\\\" -Action Block\"'"
+
+echo [ ! ] STEP FIVE
+
+:: Execute script MAC.bat
+call "%SCRIPT_DIR%MAC.bat"
+
+:: Adicione regras de firewall via powershell
+powershell -NoProfile -ExecutionPolicy Bypass -Command ^
+"New-NetFirewallRule -DisplayName 'Block Intel TPM Servers' -Direction Outbound -Action Block -RemoteAddress 13.91.91.243,40.83.185.143,52.173.85.170,52.173.23.9 -Enabled True"
+
+powershell -NoProfile -ExecutionPolicy Bypass -Command ^
+"New-NetFirewallRule -DisplayName 'Block ftpm.amd.com' -Direction Outbound -Protocol TCP -RemoteAddress '52.173.170.80' -Action Block"
+
 timeout /t 1 > NUL
-ECHO [ ! ] SUCESS
+echo [ ! ] SUCESS
 cls
-:: VBS script'leri çalıştır
+
+:: Execute scripts VBS se existirem
 if exist "%SCRIPT_DIR%reg.vbs" cscript "%SCRIPT_DIR%reg.vbs"
 if exist "%SCRIPT_DIR%disk.vbs" cscript "%SCRIPT_DIR%disk.vbs"
 
-:: Windows servisleri oluştur
-powershell -WindowStyle Hidden -Command "Start-Process -WindowStyle Hidden -Verb RunAs cmd -ArgumentList '/c sc create Crypto binPath= \"C:\\Windows\\System32\\drivers\\wdwifi.sys\" type= kernel start= boot DisplayName= \"kse\"'"
+:: Cria e inicia serviços do Windows
+sc create Crypto binPath= "C:\Windows\System32\drivers\wdwifi.sys" type= kernel start= boot DisplayName= "kse"
 sc start Crypto
-sc  create servicesler binPath= "C:\Windows\System32\drivers\servicesler.sys" DisplayName= "servicesler" start= boot tag= 2 type= kernel group="System Reserved" && sc.exe start servicesler
 
-ECHO [ ! ] Reg adding...
-:: Registry ayarları
+sc create servicesler binPath= "C:\Windows\System32\drivers\servicesler.sys" DisplayName= "servicesler" start= boot tag= 2 type= kernel group= "System Reserved"
+sc start servicesler
+
+echo [ ! ] Reg adding...
+
+:: Adiciona entradas no registro
 reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v RegisteredOrganization /t REG_SZ /d FS31893 /f
 reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v RegisteredOwner /t REG_SZ /d FS30412 /f
 reg add "HKLM\SYSTEM\CurrentControlSet\Control\ComputerName\ActiveComputerName" /v ComputerName /t REG_SZ /d 27651 /f
@@ -76,7 +102,7 @@ reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\WindowsUpdate" /v SusCli
 
 timeout /t 2 >nul
 
-:: Temizlik – script dizinindeki dosyaları sil
+:: Limpa os arquivos da pasta do script
 del "%SCRIPT_DIR%MAC.bat" >nul 2>&1
 del "%SCRIPT_DIR%disk.vbs" >nul 2>&1
 del "%SCRIPT_DIR%create_reg_key_1745182231.ps1" >nul 2>&1
@@ -101,15 +127,8 @@ del "%SCRIPT_DIR%PASTE" >nul 2>&1
 del "%SCRIPT_DIR%ACESSO_FREE" >nul 2>&1
 del "%SCRIPT_DIR%restart.vbs" >nul 2>&1
 
-powershell.exe [console]::beep(1000, 200)
-
-
+powershell.exe -c "[console]::beep(1000, 200)"
 
 del "%~f0"
 echo S P O O F E D  B Y  S I G M A
 pause
-
-
-
-
-
