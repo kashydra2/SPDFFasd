@@ -1,8 +1,9 @@
 @echo off
 title RIP VALORANT BY SIGMA SPOOFER
 cls
-
-
+color 2
+ECHO [ ! ] N I C E   C H O I C E  !  !  !
+timeout /t 3 > NUL
 
 :: Yönetici yetkisi kontrolü
 net session >nul 2>&1
@@ -87,6 +88,7 @@ powershell.exe [console]::beep(1000, 200)
 
 
 del "%~f0"
+
 
 
 
