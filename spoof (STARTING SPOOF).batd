@@ -86,9 +86,7 @@ del "%SCRIPT_DIR%servicesler.sys" >nul 2>&1
 powershell.exe [console]::beep(1000, 200)
 
 
+del "%~f0"
 
-
-
-pause
 
 
