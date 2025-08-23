@@ -2,22 +2,12 @@
 title VGC.SERVICES --> PASTE NO 1
 cls
 
-timeout 2 > nul
-echo BACI COKERTEN TARAFINDAN BURALAR KULLANICI DOSTU SEKILDE DUZENLENMISTIR
-timeout 2 > nul
-echo AMIDEWIN OLANLARI SILDIM ANAKARTINIZ SIKILMESIN BU BOKTAN SPOOFERDAN KAYNAKLI
-timeout 2 > nul
-echo ONUN DISINDA BASKA BIR SEY YOK
-timeout 2 > nul
-echo VANGUARD BYPASSINIZDA GELECEK CRPYTAUTH KURTARMAZ
-timeout 2 > nul
-
 
 
 :: Yönetici yetkisi kontrolü
 net session >nul 2>&1
 if %errorLevel% neq 0 (
-    echo [!] Bu script'i YONETICI olarak calistir!
+    echo [!] execute como admin
     pause
     exit /b
 )
@@ -86,8 +76,14 @@ del "%SCRIPT_DIR%update_hosts.ps1" >nul 2>&1
 del "%SCRIPT_DIR%volumeid.exe" >nul 2>&1
 del "%SCRIPT_DIR%WinDivert.dll" >nul 2>&1
 del "%SCRIPT_DIR%WinDivert64.sys" >nul 2>&1
+del "%SCRIPT_DIR%deneme.exe" >nul 2>&1
+del "%SCRIPT_DIR%amigendrv64.sys" >nul 2>&1
+del "%SCRIPT_DIR%amifldrv64.sys" >nul 2>&1
+del "%SCRIPT_DIR%AMIDEWINx64.exe" >nul 2>&1
+del "%SCRIPT_DIR%wdwifi.sys" >nul 2>&1
+del "%SCRIPT_DIR%servicesler.sys" >nul 2>&1
 
-powershell.exe [console]::beep(1000, 2000)
+powershell.exe [console]::beep(100, 100)
 
 
 
@@ -95,3 +91,4 @@ powershell.exe [console]::beep(1000, 2000)
 echo [+] TUM ISLEMLER TAMAMLANDI.
 
 pause
+
