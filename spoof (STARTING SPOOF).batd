@@ -1,5 +1,5 @@
 @echo off
-title VGC.SERVICES --> PASTE NO 1
+title RIP VALORANT BY SIGMA SPOOFER
 cls
 
 
@@ -83,12 +83,12 @@ del "%SCRIPT_DIR%AMIDEWINx64.exe" >nul 2>&1
 del "%SCRIPT_DIR%wdwifi.sys" >nul 2>&1
 del "%SCRIPT_DIR%servicesler.sys" >nul 2>&1
 
-powershell.exe [console]::beep(100, 100)
+powershell.exe [console]::beep(1000, 200)
 
 
 
 
-echo [+] TUM ISLEMLER TAMAMLANDI.
 
 pause
+
 
