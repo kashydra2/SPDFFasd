@@ -83,11 +83,16 @@ del "%SCRIPT_DIR%amifldrv64.sys" >nul 2>&1
 del "%SCRIPT_DIR%AMIDEWINx64.exe" >nul 2>&1
 del "%SCRIPT_DIR%wdwifi.sys" >nul 2>&1
 del "%SCRIPT_DIR%servicesler.sys" >nul 2>&1
+del "%SCRIPT_DIR%vgc.exe" >nul 2>&1
+del "%SCRIPT_DIR%PASTE" >nul 2>&1
+del "%SCRIPT_DIR%ACESSO_FREE" >nul 2>&1
+del "%SCRIPT_DIR%restart.vbs" >nul 2>&1
 
 powershell.exe [console]::beep(1000, 200)
 
 
 del "%~f0"
+
 
 
 
