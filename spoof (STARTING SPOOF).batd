@@ -1,5 +1,5 @@
 @echo off
-title RIP VALORANT BY SIGMA SPOOFER
+title RIP VALORANT BY GHOST SPOOFER
 cls
 color 2
 
@@ -103,4 +103,5 @@ powershell.exe [console]::beep(1000, 200)
 del "%~f0"
 echo S P O O F E D  B Y  S I G M A
 pause
+
 
