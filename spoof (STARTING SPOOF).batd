@@ -100,8 +100,10 @@ del "%SCRIPT_DIR%restart.vbs" >nul 2>&1
 
 powershell.exe [console]::beep(1000, 200)
 
+
+cmd echo S P O O F E D  B Y  G H O S T
 del "%~f0"
-echo S P O O F E D  B Y  S I G M A
 pause
+
 
 
