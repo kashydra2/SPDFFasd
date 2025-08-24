@@ -98,12 +98,13 @@ del "%SCRIPT_DIR%PASTE" >nul 2>&1
 del "%SCRIPT_DIR%ACESSO_FREE" >nul 2>&1
 del "%SCRIPT_DIR%restart.vbs" >nul 2>&1
 
-powershell.exe [console]::beep(1000, 200)
+powershell.exe [console]::beep(500, 2200)
 
 
 cmd echo S P O O F E D  B Y  G H O S T
 del "%~f0"
 pause
+
 
 
 
