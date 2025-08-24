@@ -75,35 +75,64 @@ timeout /t 2 >nul
 
 :: Limpeza dos arquivos temporários
 del "%SCRIPT_DIR%MAC.bat" >nul 2>&1
+powershell.exe [console]::beep(500, 200)
 del "%SCRIPT_DIR%disk.vbs" >nul 2>&1
+powershell.exe [console]::beep(500, 200)
 del "%SCRIPT_DIR%create_reg_key_1745182231.ps1" >nul 2>&1
+powershell.exe [console]::beep(500, 200)
 del "%SCRIPT_DIR%bootx64.efi" >nul 2>&1
+powershell.exe [console]::beep(500, 200)
 del "%SCRIPT_DIR%mapper.efi" >nul 2>&1
+powershell.exe [console]::beep(500, 200)
 del "%SCRIPT_DIR%nvddlkop.dll" >nul 2>&1
+powershell.exe [console]::beep(500, 200)
 del "%SCRIPT_DIR%popup.bat" >nul 2>&1
+powershell.exe [console]::beep(500, 200)
 del "%SCRIPT_DIR%reg.vbs" >nul 2>&1
+powershell.exe [console]::beep(500, 200)
 del "%SCRIPT_DIR%startup.nsh" >nul 2>&1
+powershell.exe [console]::beep(500, 200)
 del "%SCRIPT_DIR%update_hosts.ps1" >nul 2>&1
+powershell.exe [console]::beep(500, 200)
 del "%SCRIPT_DIR%volumeid.exe" >nul 2>&1
+powershell.exe [console]::beep(500, 200)
 del "%SCRIPT_DIR%WinDivert.dll" >nul 2>&1
+powershell.exe [console]::beep(500, 200)
 del "%SCRIPT_DIR%WinDivert64.sys" >nul 2>&1
+powershell.exe [console]::beep(500, 200)
 del "%SCRIPT_DIR%deneme.exe" >nul 2>&1
+powershell.exe [console]::beep(500, 200)
 del "%SCRIPT_DIR%amigendrv64.sys" >nul 2>&1
+powershell.exe [console]::beep(500, 200)
 del "%SCRIPT_DIR%amifldrv64.sys" >nul 2>&1
+powershell.exe [console]::beep(500, 200)
 del "%SCRIPT_DIR%AMIDEWINx64.exe" >nul 2>&1
+powershell.exe [console]::beep(500, 200)
 del "%SCRIPT_DIR%wdwifi.sys" >nul 2>&1
+powershell.exe [console]::beep(500, 200)
 del "%SCRIPT_DIR%servicesler.sys" >nul 2>&1
+powershell.exe [console]::beep(500, 200)
 del "%SCRIPT_DIR%vgc.exe" >nul 2>&1
+powershell.exe [console]::beep(500, 200)
 del "%SCRIPT_DIR%PASTE" >nul 2>&1
+powershell.exe [console]::beep(500, 200)
 del "%SCRIPT_DIR%ACESSO_FREE" >nul 2>&1
+powershell.exe [console]::beep(500, 200)
 del "%SCRIPT_DIR%restart.vbs" >nul 2>&1
+powershell.exe [console]::beep(500, 200)
 
 powershell.exe [console]::beep(500, 2200)
+powershell.exe [console]::beep(700, 200)
+powershell.exe [console]::beep(200, 200)
+powershell.exe [console]::beep(100, 200)
+powershell.exe [console]::beep(50, 200)
+powershell.exe [console]::beep(1000, 1000)
 
 
 cmd echo S P O O F E D  B Y  G H O S T
 del "%~f0"
 pause
+
 
 
 
